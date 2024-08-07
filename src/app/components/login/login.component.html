@@ -1,0 +1,23 @@
+<div class="form-container">
+    <form [formGroup]="loginForm">
+        <h2>Connexion</h2>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" required>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <p *ngIf="email?.hasError('required')" class="error">L'email est requis!</p>
+                <p *ngIf="email?.hasError('email')" class="error">L'email doit etre valid!</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" required>
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <p *ngIf="password?.hasError('required')" class="error">Le mot de passe est requis!</p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="onSubmitLoginForm()" [disabled]="loginForm.invalid">Se
+            connecter</button>
+    </form>
+</div>

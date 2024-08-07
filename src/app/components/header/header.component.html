@@ -1,0 +1,14 @@
+<header class="main-header">
+    <div class="logo">
+        <h1>TodoApp</h1>
+    </div>
+    <nav>
+        @if (!isAuthenticated) {
+        <a routerLink="/login">Se connecter</a>
+        <a routerLink="/register">S'inscrire</a>
+
+        } @else {
+        <a (click)="logout()">Se deconnecter</a>
+        }
+    </nav>
+</header>

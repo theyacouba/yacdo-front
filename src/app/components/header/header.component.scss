@@ -1,0 +1,79 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #2c3e50;
+$background-color: #ecf0f1;
+$header-background-color: rgba(0, 0, 0, 0.8);
+$font-family: 'Arial, sans-serif';
+$button-border-radius: 25px;
+
+// Mixins
+@mixin button($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: $button-border-radius;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+        transform: translateY(-3px);
+    }
+
+    &:active {
+        transform: translateY(-1px);
+    }
+}
+
+// Styles
+body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $background-color;
+}
+
+.main-header {
+    width: 100%;
+    background-color: $header-background-color;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .logo {
+        h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+    }
+
+    nav {
+        padding: 0px, 100px;
+        padding-right: 3%;
+        display: flex;
+        gap: 15px;
+
+        .btn {
+            @include button(white, $text-color);
+            padding: 10px 20px;
+            font-size: 16px;
+
+            &.btn-login {
+                @include button($primary-color, white);
+            }
+
+            &.btn-register {
+                @include button($secondary-color, white);
+            }
+        }
+
+        a {
+            color: white;
+        }
+    }
+}

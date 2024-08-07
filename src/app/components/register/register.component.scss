@@ -1,0 +1,97 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #2c3e50;
+$background-color: #ecf0f1;
+$form-background-color: rgba(255, 255, 255, 0.9);
+$font-family: 'Arial, sans-serif';
+$input-border-color: lighten($text-color, 30%);
+$input-focus-color: darken($primary-color, 10%);
+$button-border-radius: 25px;
+
+// Mixins
+@mixin button($bg-color) {
+    background-color: $bg-color;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: $button-border-radius;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+        transform: translateY(-3px);
+    }
+
+    &:active {
+        transform: translateY(-1px);
+    }
+}
+
+// Styles
+body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.form-container {
+    background-color: $form-background-color;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: $text-color;
+    font-size: 28px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: $text-color;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $input-border-color;
+        border-radius: 5px;
+        font-size: 16px;
+
+        &:focus {
+            border-color: $input-focus-color;
+            outline: none;
+        }
+    }
+}
+
+.btn {
+    @include button($primary-color);
+    margin-top: 20px;
+}
+
+.error {
+    color: red;
+}

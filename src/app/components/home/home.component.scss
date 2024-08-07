@@ -1,0 +1,69 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #2c3e50;
+$background-color: #ecf0f1;
+$font-family: 'Arial, sans-serif';
+
+// Mixins
+@mixin button($bg-color) {
+    background-color: $bg-color;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+    }
+}
+
+// Styles
+body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    margin-bottom: 20px;
+
+    h1 {
+        color: $text-color;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: lighten($text-color, 20%);
+        font-size: 18px;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .btn {
+        @include button($primary-color);
+
+        &.btn-secondary {
+            @include button($secondary-color);
+        }
+    }
+}

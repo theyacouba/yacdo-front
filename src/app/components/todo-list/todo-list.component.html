@@ -1,0 +1,30 @@
+<div class="todo-container">
+    <form class="todo-form" action="/add-todo" method="post">
+        <h2>Ajouter un Todo</h2>
+        <div class="form-group">
+            <label for="todo">Nouvelle tâche</label>
+            <input type="text" id="todo" name="todo" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+    <div class="todo-list">
+        <h2>Liste des Todos</h2>
+        <ul>
+            <!-- Exemple de todo -->
+            <li>
+                <input type="checkbox" id="todo1" name="todo1">
+                <label for="todo1">Première tâche</label>
+            </li>
+            <li>
+                <input type="checkbox" id="todo2" name="todo2">
+                <label for="todo2">Deuxième tâche</label>
+            </li>
+            <!-- Ajouter dynamiquement des todos ici -->
+            <hr>
+            <li>
+                <input type="checkbox" id="todo2" name="todo2">
+                <label for="todo2">Masquer les taches terminées</label>
+            </li>
+        </ul>
+    </div>
+</div>
