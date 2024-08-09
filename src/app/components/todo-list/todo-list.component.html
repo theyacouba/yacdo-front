@@ -1,27 +1,26 @@
 <div class="todo-container">
-    <form class="todo-form" action="/add-todo" method="post">
+    <form class="todo-form">
         <h2>Ajouter un Todo</h2>
         <div class="form-group">
             <label for="todo">Nouvelle tâche</label>
-            <input type="text" id="todo" name="todo" required>
+            <input type="text" id="todo" name="todo" [(ngModel)]="newTodo">
         </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-primary" (click)="onNewTodo()"
+            [disabled]="newTodo == undefined">Ajouter</button>
     </form>
     <div class="todo-list">
         <h2>Liste des Todos</h2>
-        <ul>
+        <ul *ngIf="todos">
             <!-- Exemple de todo -->
-            <li>
-                <input type="checkbox" id="todo1" name="todo1">
-                <label for="todo1">Première tâche</label>
-            </li>
-            <li>
-                <input type="checkbox" id="todo2" name="todo2">
-                <label for="todo2">Deuxième tâche</label>
+            <li *ngFor="let todo of todos">
+                <input type="checkbox" id="done" (click)="updateStatus(todo.id)" [checked]="todo.isDone">
+                <label for="done" [class]="todo.isDone ? 'dash' : ''">{{ todo.title }}</label>
+                <span class="trash" (click)="onDelete(todo.id)">❌</span>
             </li>
             <!-- Ajouter dynamiquement des todos ici -->
             <hr>
-            <li>
+            <p *ngIf="todos.length <= 0">Aucune tache pour l'instant</p>
+            <li *ngIf="todos.length > 0">
                 <input type="checkbox" id="todo2" name="todo2">
                 <label for="todo2">Masquer les taches terminées</label>
             </li>

@@ -140,7 +140,7 @@ h2 {
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        // text-decoration: line-through;
+
 
         input[type="checkbox"] {
             margin-right: 10px;
@@ -153,9 +153,24 @@ h2 {
             font-size: 18px;
         }
     }
+
+    .dash {
+        text-decoration: line-through;
+    }
 }
 
 .btn {
     @include button($primary-color);
     margin-top: 20px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    .trash {
+        cursor: pointer;
+        color: red;
+    }
 }
