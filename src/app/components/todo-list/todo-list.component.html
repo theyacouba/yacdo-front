@@ -11,19 +11,17 @@
     <div class="todo-list">
         <h2>Liste des Todos</h2>
         <ul *ngIf="todos">
-            <!-- Exemple de todo -->
             <li *ngFor="let todo of todos">
                 <input type="checkbox" id="done" (click)="updateStatus(todo.id)" [checked]="todo.isDone">
-                <label for="done" [class]="todo.isDone ? 'dash' : ''">{{ todo.title }}</label>
+                <label [class]="todo.isDone ? 'dash' : ''">{{ todo.title }}</label>
                 <span class="trash" (click)="onDelete(todo.id)">❌</span>
             </li>
-            <!-- Ajouter dynamiquement des todos ici -->
             <hr>
-            <p *ngIf="todos.length <= 0">Aucune tache pour l'instant</p>
-            <li *ngIf="todos.length > 0">
-                <input type="checkbox" id="todo2" name="todo2">
-                <label for="todo2">Masquer les taches terminées</label>
-            </li>
+            <p *ngIf="todos.length <= 0">Aucune tâche pour l'instant</p>
         </ul>
+        <li>
+            <input type="checkbox" id="hideTodo" (change)="onHideTodoChange($event)">
+            <label for="hideTodo">Masquer les tâches terminées</label>
+        </li>
     </div>
 </div>

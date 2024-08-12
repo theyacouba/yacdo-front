@@ -3,7 +3,6 @@ import { TodoService } from '../../core/services/todo.service';
 import { Todo } from '../../core/models/todo.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,19 +14,23 @@ import { switchMap } from 'rxjs';
 export class TodoListComponent implements OnInit {
 
   todos!: Todo[];
-  newTodo!: string;
+  filteredTodo: Todo[] = [];
+  newTodo!: string | null;
   done!: Boolean;
+  hideTodo: Boolean = false;
   constructor(private todoService: TodoService) { }
 
   ngOnInit(): void {
     this.loadTodos();
-    console.log(this.done)
   }
 
   loadTodos(): void {
     this.todoService.getAllTodo().subscribe({
       next: (value) => {
-        this.todos = value.body.reverse();
+        this.todos = value.body.reverse().sort((a, b) => a.isDone > b.isDone ? 1 : -1).sort((a, b) => b.id - a.id);
+        if (this.hideTodo) {
+          this.filterTodo(this.todos);
+        }
       },
       error: (error) => {
         console.error(error);
@@ -37,15 +40,14 @@ export class TodoListComponent implements OnInit {
 
   onNewTodo() {
     console.log(this.newTodo);
-    this.todoService.addTodo(this.newTodo).subscribe({
+    this.todoService.addTodo(this.newTodo!).subscribe({
       next: (value) => {
         this.loadTodos();
+        this.newTodo = null;
       },
       error: (error) => {
         console.error(error);
       }
-
-
     });
   }
 
@@ -57,5 +59,22 @@ export class TodoListComponent implements OnInit {
 
   updateStatus(id: number) {
     this.todoService.updateStatus(id).subscribe(() => this.loadTodos());
+  }
+
+  onHideTodoChange(event: Event) {
+    this.hideTodo = (event.target as HTMLInputElement).checked
+    if (this.hideTodo) {
+      this.filterTodo(this.todos);
+    } else {
+      this.loadTodos();
+    }
+  }
+
+  filterTodo(todos: Todo[]): void {
+    this.filteredTodo = [];
+    todos.forEach(element => {
+      element.isDone ? null : this.filteredTodo.push(element);
+    });
+    this.todos = this.filteredTodo;
   }
 }
